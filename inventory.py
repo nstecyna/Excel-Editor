@@ -45,7 +45,7 @@ def inventory(filename, wb):
             print(sheet[itemCol][i].value)
 
     if saved != []:
-        print('Please input an integer for each count, or input "skip" to skip'
+        print('\nPlease input an integer for each count, or input "skip" to skip'
             + ' completely for this inventory.')
         for i in saved:
             # we know that the row will not be empty or with a category, so we
