@@ -21,6 +21,10 @@ def inventory(filename, wb):
     prevCol = input("Please input the column for the previous inventory: ")
     currCol = input("Please input the column for the current inventory: ")
 
+    print('\nPlease input an integer for each count, or input "next" to save for'
+        + ' later.')
+    saved = []
+
     for i in range(len(sheet[itemCol])):
         # only allows edits for rows with an integer in the previous
         # inventory column, so that category label rows are not edited
@@ -29,13 +33,30 @@ def inventory(filename, wb):
             newInput = ""
             # we avoid the error for when newInput takes in a string that is
             # not an int
-            while not newInput.isdigit():
+            while not newInput.isdigit() and newInput != "next":
                 newInput = input(sheet[itemCol][i].value + ", Previous: "
                 + str(sheet[prevCol][i].value) + ", Current: ")
-            sheet[currCol][i].value = int(newInput)
-        # if the item column is empty, we don't care so we just skip it
+            if newInput == "next":
+                saved.append(i)
+            else:
+                sheet[currCol][i].value = int(newInput)
+        # if the item row is empty, we don't care so we just skip it
         elif (sheet[itemCol][i].value != None):
             print(sheet[itemCol][i].value)
+
+    if saved != []:
+        print('Please input an integer for each count, or input "skip" to skip'
+            + ' completely for this inventory.')
+        for i in saved:
+            # we know that the row will not be empty or with a category, so we
+            # can skip checking for it
+            newInput = ""
+            while not newInput.isdigit() and newInput != "skip":
+                newInput = input(sheet[itemCol][i].value + ", Previous: "
+                + str(sheet[prevCol][i].value) + ", Current: ")
+            if newInput != "skip":
+                sheet[currCol][i].value = int(newInput)
+
 
     wb.save(filename)
     print("\nSaved Inventory.")
