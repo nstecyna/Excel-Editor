@@ -14,6 +14,9 @@ def menu():
         choice = input("You can choose to: Inventory; ChangeDoc; Exit  ")
         if (choice.lower() == "inventory"):
             inventory.inventory(filename, wb)
+            # have to refresh the wb, because we saved the info in the wb in
+            # the inventory method
+            wb = openpyxl.load_workbook(filename)
         elif (choice.lower() == "changedoc"):
             filename, wb = documentCheck.documentCheck();
         elif (choice.lower() == "exit"):
