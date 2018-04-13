@@ -11,15 +11,15 @@ def menu():
     running = True
     while (running):
         print("What would you like to do?")
-        choice = input("You can choose to: Inventory; ChangeDoc; Exit  ")
-        if (choice.lower() == "inventory"):
+        choice = input("You can choose to: Inventory; Change Document; Exit  \n")
+        if (choice.lower() in ("inventory", "i")):
             inventory.inventory(filename, wb)
             # have to refresh the wb, because we saved the info in the wb in
             # the inventory method
             wb = openpyxl.load_workbook(filename)
-        elif (choice.lower() == "changedoc"):
+        elif (choice.lower() in ("changedoc", "change document", "document change", "change", "document", "cd", "c", "d")):
             filename, wb = documentCheck.documentCheck();
-        elif (choice.lower() == "exit"):
+        elif (choice.lower() in ("exit", "e")):
             running = False
         else:
             print("Invalid choice.")
