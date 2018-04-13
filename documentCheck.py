@@ -11,7 +11,8 @@ def documentCheck():
         IOError = an error for when using an invalid filename for a Workbook
     """
     excel_doc = input("Please enter a valid excel document name: ")
-    excel_doc += ".xlsx"
+    if (excel_doc[-5:] != ".xlsx"):
+        excel_doc += ".xlsx"
     try:
         wb = openpyxl.load_workbook(excel_doc)
         return excel_doc, wb
