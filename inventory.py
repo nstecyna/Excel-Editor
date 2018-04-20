@@ -17,12 +17,16 @@ def inventory(filename, wb):
             + "(case-sensitive) " + str(wb.sheetnames) + ": ")
     sheet = wb[sheetIn]
 
-    itemCol = input("Please input the column for the item names: ")
-    prevCol = input("Please input the column for the previous inventory: ")
-    currCol = input("Please input the column for the current inventory: ")
+    itemCol = input("Please input the column for the item names: ").upper()
+    prevCol = input("Please input the column for the previous inventory: ").upper()
+    currCol = input("Please input the column for the current inventory: ").upper()
 
-    print('\nPlease input an integer for each count, or input "next" to save for'
-        + ' later.')
+    # i'd like to figure out a way to easily create the prevCol from the
+    # currCol, but the only way i'm thinking it would work would be a big thing
+    # using unicode to figure it out
+
+    print('\nPlease input an integer for each count, or input "next" to save'
+        + ' for later.')
     saved = []
 
     for i in range(len(sheet[itemCol])):
@@ -31,7 +35,7 @@ def inventory(filename, wb):
         # as an item
         if (isinstance(sheet[prevCol][i].value, int)):
             newInput = ""
-            # we avoid the error for when newInput takes in a string that is
+            # avoids the error for when newInput takes in a string that is
             # not an int
             while not newInput.isdigit() and newInput != "next":
                 newInput = input(sheet[itemCol][i].value + ", Previous: "
@@ -45,8 +49,8 @@ def inventory(filename, wb):
             print(sheet[itemCol][i].value)
 
     if saved != []:
-        print('\nPlease input an integer for each count, or input "skip" to skip'
-            + ' completely for this inventory.')
+        print('\nPlease input an integer for each count, or input "skip" to'
+            + ' skip completely for this inventory.')
         for i in saved:
             # we know that the row will not be empty or with a category, so we
             # can skip checking for it
