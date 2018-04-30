@@ -1,12 +1,12 @@
 import openpyxl
 
-def search(wb, sheet, itemCol):
+def search(sheet, itemCol):
     '''
     Searches for cells using user input as a keyword, asks the user to choose
     one, and returns that cell.
     param list:
-        (str) filename = the filename of the active excel document
-        (Workbook) wb = a workbook of the active excel document
+        (Sheet) sheet = the active Workbook Sheet
+        (str) itemCol = the column with the item names on the current sheet
     returns:
         (Cell) cell = the cell the user wants from the search
     '''
